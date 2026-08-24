@@ -1,0 +1,25 @@
+{
+  "name": "signal-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The best-rated TV shows, films, and documentaries on IMDb, from a bundled snapshot of IMDb's public non-commercial datasets.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "build:imdb": "node scripts/build-imdb-data.mjs"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.5.4"
+  }
+}
