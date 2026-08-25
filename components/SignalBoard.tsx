@@ -170,6 +170,7 @@ export default function SignalBoard() {
                     {t.year ? <span>{t.year}</span> : null}
                     {t.genres.length ? <span className="dotsep">{t.genres.join(", ")}</span> : null}
                   </div>
+                  {t.service ? <span className="svcbadge">{t.service}</span> : null}
                   {t.summary ? <p className="osummary">{t.summary}</p> : null}
                 </div>
                 <div className="oratings">
@@ -193,8 +194,8 @@ export default function SignalBoard() {
       <footer className="foot">
         <p>
           Ranked from IMDb&apos;s public non-commercial datasets. This product uses IMDb data but is not endorsed or
-          certified by IMDb. No streaming-availability data is included — check your own services for where to
-          watch.{updatedAt ? " Updated " + updatedAt.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }) + "." : ""}
+          certified by IMDb. Streaming flags are UK availability via Watchmode and may lag reality — treat them as a
+          lead, not gospel.{updatedAt ? " Updated " + updatedAt.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" }) + "." : ""}
         </p>
       </footer>
     </div>

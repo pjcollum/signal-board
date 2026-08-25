@@ -15,6 +15,7 @@ export interface Title {
   year: number | null;
   genres: string[];
   summary: string | null; // one-sentence plot, via OMDb — null if unavailable
+  service: string | null; // most well-known UK streaming service it's on, via Watchmode — null if unavailable
 }
 
 export interface BoardResult {

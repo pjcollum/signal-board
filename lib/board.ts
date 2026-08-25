@@ -1,6 +1,7 @@
 import type { BoardResult, MediaType, PopularWindow, SortBy, Title } from "./types";
 import rawData from "./imdb-data.json";
 import { fetchPlots } from "./omdb-client";
+import { fetchTopServices } from "./watchmode-client";
 
 // Pre-filtered, joined snapshot of IMDb's public non-commercial datasets
 // (title.basics.tsv.gz + title.ratings.tsv.gz), baked by
@@ -36,7 +37,7 @@ const POPULAR_WINDOWS: Record<PopularWindow, number | null> = {
 // higher floor to surface titles people have actually heard of.
 const RATING_MIN_VOTES = 10000;
 
-function toTitle(r: RawTitle, plots: Map<string, string | null>): Title {
+function toTitle(r: RawTitle, plots: Map<string, string | null>, services: Map<string, string | null>): Title {
   return {
     id: r.id,
     title: r.title,
@@ -46,6 +47,7 @@ function toTitle(r: RawTitle, plots: Map<string, string | null>): Title {
     year: r.year,
     genres: r.genres,
     summary: plots.get(r.id) ?? null,
+    service: services.get(r.id) ?? null,
   };
 }
 
@@ -79,6 +81,7 @@ export async function fetchBoard(
   if (!rows.length) throw new Error("No results");
   const page = rows.slice(offset, offset + PAGE_SIZE);
   if (!page.length) throw new Error("No more results");
-  const plots = await fetchPlots(page.map((r) => r.id));
-  return { titles: page.map((r) => toTitle(r, plots)), hasMore: offset + PAGE_SIZE < rows.length };
+  const ids = page.map((r) => r.id);
+  const [plots, services] = await Promise.all([fetchPlots(ids), fetchTopServices(ids)]);
+  return { titles: page.map((r) => toTitle(r, plots, services)), hasMore: offset + PAGE_SIZE < rows.length };
 }
