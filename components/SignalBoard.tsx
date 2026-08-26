@@ -32,9 +32,9 @@ const WINDOW_PHRASE: Record<PopularWindow, string> = {
 // ── App ──────────────────────────────────────────────────────────────────
 export default function SignalBoard() {
   const [mediaType, setMediaType] = useState<MediaType>("tv");
-  const [sortBy, setSortBy] = useState<SortBy>("rating");
+  const [sortBy, setSortBy] = useState<SortBy>("popularity");
   const [docsOnly, setDocsOnly] = useState(false);
-  const [popularWindow, setPopularWindow] = useState<PopularWindow>("5");
+  const [popularWindow, setPopularWindow] = useState<PopularWindow>("1");
   const [entry, setEntry] = useState<Entry>({ status: "loading" });
   const [loadingMore, setLoadingMore] = useState(false);
   const [updatedAt, setUpdatedAt] = useState<Date | null>(null);
@@ -67,7 +67,7 @@ export default function SignalBoard() {
       .finally(() => { if (runId.current === my) setLoadingMore(false); });
   }, [entry, loadingMore, mediaType, sortBy, docsOnly, popularWindow]);
 
-  useEffect(() => { load("tv", "rating", false, "5"); /* eslint-disable-next-line */ }, []);
+  useEffect(() => { load("tv", "popularity", false, "1"); /* eslint-disable-next-line */ }, []);
 
   const setType = (t: MediaType) => { if (t === mediaType) return; setMediaType(t); load(t, sortBy, docsOnly, popularWindow); };
   const setSort = (sb: SortBy) => { if (sb === sortBy) return; setSortBy(sb); load(mediaType, sb, docsOnly, popularWindow); };
