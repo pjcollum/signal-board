@@ -37,7 +37,11 @@ const POPULAR_WINDOWS: Record<PopularWindow, number | null> = {
 // higher floor to surface titles people have actually heard of.
 const RATING_MIN_VOTES = 10000;
 
-function toTitle(r: RawTitle, plots: Map<string, string | null>, services: Map<string, string | null>): Title {
+function toTitle(
+  r: RawTitle,
+  plots: Map<string, string | null>,
+  services: Map<string, string | null>,
+): Title {
   return {
     id: r.id,
     title: r.title,
@@ -58,7 +62,7 @@ export async function fetchBoard(
   sortBy: SortBy,
   docsOnly: boolean,
   popularWindow: PopularWindow = "5",
-  offset = 0
+  offset = 0,
 ): Promise<BoardResult> {
   let rows = ALL.filter((r) => r.type === mediaType);
   if (docsOnly) rows = rows.filter((r) => r.genres.includes("Documentary"));
@@ -83,5 +87,8 @@ export async function fetchBoard(
   if (!page.length) throw new Error("No more results");
   const ids = page.map((r) => r.id);
   const [plots, services] = await Promise.all([fetchPlots(ids), fetchTopServices(ids)]);
-  return { titles: page.map((r) => toTitle(r, plots, services)), hasMore: offset + PAGE_SIZE < rows.length };
+  return {
+    titles: page.map((r) => toTitle(r, plots, services)),
+    hasMore: offset + PAGE_SIZE < rows.length,
+  };
 }

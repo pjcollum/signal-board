@@ -27,7 +27,9 @@ export async function fetchPlot(imdbId: string): Promise<string | null> {
     if (!res.ok) throw new Error(`OMDb ${res.status}`);
     const data = await res.json();
     const plot: string | null =
-      data?.Response === "True" && data.Plot && data.Plot !== "N/A" ? firstSentence(data.Plot) : null;
+      data?.Response === "True" && data.Plot && data.Plot !== "N/A"
+        ? firstSentence(data.Plot)
+        : null;
     cache.set(imdbId, plot);
     return plot;
   } catch {

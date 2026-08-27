@@ -1,6 +1,6 @@
 # Signal Board
 
-The best-rated TV shows, films, and documentaries on IMDb — a *discovery board* for what's worth hunting down.
+The best-rated TV shows, films, and documentaries on IMDb — a _discovery board_ for what's worth hunting down.
 
 All data comes from **[IMDb's public non-commercial datasets](https://datasets.imdbws.com)** — free, no API key, no account. A build script downloads and filters them into a small JSON snapshot bundled with the app.
 

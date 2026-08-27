@@ -17,7 +17,9 @@ export async function POST(req: NextRequest) {
   const mediaType: MediaType = body?.mediaType === "film" ? "film" : "tv";
   const sortBy: SortBy = body?.sortBy === "popularity" ? "popularity" : "rating";
   const docsOnly: boolean = body?.docsOnly === true;
-  const popularWindow: PopularWindow = POPULAR_WINDOWS.includes(body?.popularWindow) ? body.popularWindow : "5";
+  const popularWindow: PopularWindow = POPULAR_WINDOWS.includes(body?.popularWindow)
+    ? body.popularWindow
+    : "5";
   const offset: number = Number.isInteger(body?.offset) && body.offset >= 0 ? body.offset : 0;
 
   try {
@@ -26,7 +28,7 @@ export async function POST(req: NextRequest) {
   } catch (e: any) {
     return NextResponse.json(
       { error: "Request failed", detail: String(e?.message || e).slice(0, 300) },
-      { status: 502 }
+      { status: 502 },
     );
   }
 }

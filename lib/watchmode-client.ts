@@ -67,6 +67,8 @@ export async function fetchTopService(imdbId: string): Promise<string | null> {
 }
 
 export async function fetchTopServices(imdbIds: string[]): Promise<Map<string, string | null>> {
-  const results = await Promise.all(imdbIds.map(async (id) => [id, await fetchTopService(id)] as const));
+  const results = await Promise.all(
+    imdbIds.map(async (id) => [id, await fetchTopService(id)] as const),
+  );
   return new Map(results);
 }

@@ -33,7 +33,10 @@ async function streamLines(url, onLine) {
   const rl = createInterface({ input: gunzip, crlfDelay: Infinity });
   let first = true;
   for await (const line of rl) {
-    if (first) { first = false; continue; } // header
+    if (first) {
+      first = false;
+      continue;
+    } // header
     onLine(line);
   }
 }

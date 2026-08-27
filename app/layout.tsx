@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Signal Board — top rated on IMDb",
-  description: "The best-rated TV shows, films, and documentaries on IMDb — worth hunting down on Plex.",
+  description:
+    "The best-rated TV shows, films, and documentaries on IMDb — worth hunting down on Plex.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

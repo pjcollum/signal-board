@@ -7,11 +7,11 @@ export type SortBy = "rating" | "popularity";
 export type PopularWindow = "1" | "2" | "5" | "10" | "all";
 
 export interface Title {
-  id: string;        // IMDb tconst, e.g. "tt0903747"
+  id: string; // IMDb tconst, e.g. "tt0903747"
   title: string;
-  link: string;       // IMDb title page
-  rating: number;      // IMDb averageRating (0–10)
-  votes: number;       // IMDb numVotes — used as the "popularity" proxy
+  link: string; // IMDb title page
+  rating: number; // IMDb averageRating (0–10)
+  votes: number; // IMDb numVotes — used as the "popularity" proxy
   year: number | null;
   genres: string[];
   summary: string | null; // one-sentence plot, via OMDb — null if unavailable
